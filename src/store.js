@@ -1,5 +1,6 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 
 import reducer from './reducers'
+import middleware from './middleware'
 
-export default createStore(reducer)
+export default createStore(reducer, applyMiddleware(...middleware))
