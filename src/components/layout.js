@@ -4,9 +4,9 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 import history from '../history'
 import Router from '../router'
-import { connectTo } from '../utils/generic'
+import { connectTo, reportError } from '../utils/generic'
 import { runCommand } from '../actions/dev'
-import { saveInstallProposalEvent } from '../actions/generic'
+import { saveInstallProposalEvent, startApp } from '../actions/generic'
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -43,11 +43,16 @@ class Layout extends React.Component {
   componentDidMount() {
     window.runCommand = this.props.runCommand
 
-    const { saveInstallProposalEvent } = this.props
+    const { saveInstallProposalEvent, startApp } = this.props
+    startApp()
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault()
       saveInstallProposalEvent(e)
     })
+  }
+
+  componentDidCatch(error, info) {
+    reportError(error, info)
   }
 }
 
@@ -57,7 +62,8 @@ export default connectTo(
   }),
   {
     runCommand,
-    saveInstallProposalEvent
+    saveInstallProposalEvent,
+    startApp
   },
   Layout
 )

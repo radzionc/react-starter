@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import history from './history'
 import { unauthorize } from './actions/auth'
+import { setUserForReporting } from './utils/generic'
 
 export const sagaMiddleware = createSagaMiddleware()
 
@@ -22,7 +23,12 @@ const localStorageMiddleware = store => next => action => {
       nextState.auth.tokenExpirationTime
     )
   }
-
+  if (prevState.user.id !== nextState.user.id) {
+    if (nextState.user.id) {
+      localStorage.setItem('id', nextState.user.id)
+    }
+    setUserForReporting(nextState.user.id)
+  }
   return result
 }
 

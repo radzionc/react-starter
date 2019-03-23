@@ -7,6 +7,7 @@ import previousRouter from './previous-router'
 import generic from './generic'
 import theme from './theme'
 import auth from './auth'
+import user from './user'
 import { unauthorize } from '../actions/auth'
 
 const getNewReducer = () =>
@@ -16,7 +17,8 @@ const getNewReducer = () =>
       previousRouter,
       generic,
       theme,
-      auth
+      auth,
+      user
     }).reduce(
       (acc, [key, createReducer]) => ({
         ...acc,

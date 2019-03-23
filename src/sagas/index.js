@@ -9,8 +9,15 @@ import * as devSagas from './dev'
 import * as authActions from '../actions/auth'
 import * as authSagas from './auth'
 
+import * as genericActions from '../actions/generic'
+import * as genericSagas from './generic'
+
 export default function* saga() {
-  const relations = [[devActions, devSagas], [authActions, authSagas]]
+  const relations = [
+    [devActions, devSagas],
+    [authActions, authSagas],
+    [genericActions, genericSagas]
+  ]
 
   for (const [actions, sagas] of relations) {
     for (const [actionName, action] of Object.entries(actions)) {
