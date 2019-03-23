@@ -5,6 +5,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import history from '../history'
 import Router from '../router'
 import { connectTo } from '../utils/generic'
+import { runCommand } from '../actions/dev'
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -37,12 +38,18 @@ class Layout extends React.Component {
       </ThemeProvider>
     )
   }
+
+  componentDidMount() {
+    window.runCommand = this.props.runCommand
+  }
 }
 
 export default connectTo(
   state => ({
     theme: state.theme
   }),
-  {},
+  {
+    runCommand
+  },
   Layout
 )
