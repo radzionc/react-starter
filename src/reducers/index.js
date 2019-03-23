@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers, createStore } from 'redux'
 import { connectRouter } from 'connected-react-router'
 
 import history from '../history'
@@ -6,6 +6,8 @@ import history from '../history'
 import previousRouter from './previous-router'
 import generic from './generic'
 import theme from './theme'
+import auth from './auth'
+import { unauthorize } from '../actions/auth'
 
 const getNewReducer = () =>
   combineReducers({
@@ -13,7 +15,8 @@ const getNewReducer = () =>
     ...Object.entries({
       previousRouter,
       generic,
-      theme
+      theme,
+      auth
     }).reduce(
       (acc, [key, createReducer]) => ({
         ...acc,
@@ -26,5 +29,9 @@ const getNewReducer = () =>
 const reducer = getNewReducer()
 
 export default (state, action) => {
+  if (action.type === unauthorize.getType()) {
+    return reducer(createStore(getNewReducer()).getState())
+  }
+
   return reducer(state, action)
 }

@@ -6,8 +6,11 @@ import * as routerSagas from './router'
 import * as devActions from '../actions/dev'
 import * as devSagas from './dev'
 
+import * as authActions from '../actions/auth'
+import * as authSagas from './auth'
+
 export default function* saga() {
-  const relations = [[devActions, devSagas]]
+  const relations = [[devActions, devSagas], [authActions, authSagas]]
 
   for (const [actions, sagas] of relations) {
     for (const [actionName, action] of Object.entries(actions)) {
