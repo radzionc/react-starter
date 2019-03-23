@@ -6,6 +6,7 @@ import history from '../history'
 import Router from '../router'
 import { connectTo } from '../utils/generic'
 import { runCommand } from '../actions/dev'
+import { saveInstallProposalEvent } from '../actions/generic'
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -22,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     box-sizing: border-box;
     font-family: sans-serif;
-    color: ${p => p.theme.color.mainText}
+    color: ${p => p.theme.color.mainText};
   }
 `
 
@@ -41,6 +42,12 @@ class Layout extends React.Component {
 
   componentDidMount() {
     window.runCommand = this.props.runCommand
+
+    const { saveInstallProposalEvent } = this.props
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault()
+      saveInstallProposalEvent(e)
+    })
   }
 }
 
@@ -49,7 +56,8 @@ export default connectTo(
     theme: state.theme
   }),
   {
-    runCommand
+    runCommand,
+    saveInstallProposalEvent
   },
   Layout
 )

@@ -1,5 +1,22 @@
 import { createReducer } from 'redux-act'
 
-const getDefaultState = () => ({})
+import * as a from '../actions/generic'
 
-export default () => createReducer({}, getDefaultState())
+const getDefaultState = () => ({
+  proposalEvent: undefined
+})
+
+export default () =>
+  createReducer(
+    {
+      [a.saveInstallProposalEvent]: (state, proposalEvent) => ({
+        ...state,
+        proposalEvent
+      }),
+      [a.promptToAddToHomeScreen]: state => ({
+        ...state,
+        proposalEvent: undefined
+      })
+    },
+    getDefaultState()
+  )
