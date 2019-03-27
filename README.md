@@ -13,6 +13,8 @@ npm install
 npm start
 ```
 
+## [Udemy Course](https://www.udemy.com/how-to-start-react-project-best-practices/learn/lecture/14129977#overview)
+
 ## License
 
 MIT © [RodionChachura](https://geekrodion.com)
