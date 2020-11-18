@@ -1,5 +1,5 @@
-# react-starter
-
+# React Starter
+We will make a newly created react app suitable to work with redux and redux-saga.
 >
 
 ![all text](https://cdn-images-1.medium.com/max/880/1*fAdzB-JKqm00LtMqcGP22Q.png)
@@ -13,7 +13,14 @@ npm install
 npm start
 ```
 
-## [Udemy Course](https://www.udemy.com/how-to-start-react-project-best-practices/learn/lecture/14129977#overview)
+## [Blog Post](https://geekrodion.com/blog/redux-saga-cra)
+
+## Technologies
+* React
+* Redux
+* Redux Saga
+* Styled Components
+* Storybook
 
 ## License
 
